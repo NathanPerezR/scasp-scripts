@@ -1,46 +1,46 @@
 % Nathan Perez | 10.28.2023
 % random s(CASP) progarm, playing around with syntax & truth states.
 
-% two people are CloseFriends if both agree to being Friends
-CloseFriends(X,Y) :- Friends(X,Y).
-CloseFriends(X,Y) :- Friends(Y,X).
-
 % two people x & y are roommates if roomMates at least one pair
-roomMates(X,Y). 
-LiveTogether(X,Y) :- roomMates(Y,X). % Order does not matter
-LiveTogether(X,Y) :- roomMates(X,Y). % Order does not matter
+% two people are closefriends if both agree to being friends
+closefriends(X,Y) :- friends(X,Y).
+closefriends(X,Y) :- friends(Y,X).
 
-Person(1).
-Person(2).
-Person(3).
-Person(4).
-Person(5).
-Salt(1).
-Salt(2).
-Salt(3).
-Friends(2,5).
-Friends(3,4).
-Friends(4,2).
-Friends(4,3).
-roomMates(4,1).
+% two people x & y are roommates if roommates at least one pair
+livetogether(X,Y) :- roommates(Y,X). % order does not matter
+livetogether(X,Y) :- roommates(X,Y). % order does not matter
 
-buySalt(X) :-  % a Person x should buy Salt if
-  not -Salt(X).    % no evidence of having Salt 
+person(1).
+person(2).
+person(3).
+person(4).
+person(5).
+salt(1).
+salt(2).
+salt(3).
+friends(2,5).
+friends(3,4).
+friends(4,2).
+friends(4,3).
+roommates(4,1).
 
-borrowRoomMatesSalt(X) :- % a Person X should borrow Salt if
-    not -Salt(X),           % assume it is true there is no Salt AND
-    CloseFriends(X,Y),       % there is a Close friend has a Close friend Y
-    LiveTogether(X,Y),       % and X and Y are roommates
-	  Salt(Y).                 % and who has Salt
+buy_salt(X) :-  % a person x should buy salt if
+  not -salt(X).   % no evidence of having salt 
 
-stealSaltFromRoomMate(X) :-
-    not -Salt(X),         % assume it is true there is no Salt AND
-    not CloseFriends(X,Y), % it can be assumed that X and Y are not Close Friends
-    LiveTogether(X,Y),     % and X and Y are roommates
-	  Salt(Y).               % Y has Salt 
+borrow_roommates_salt(X) :- % a person x should borrow salt if
+    not -salt(X),           % assume it is true there is no salt and
+    closefriends(X,Y),        % there is a close friend has a close friend y
+    livetogether(X,Y),        % and x and y are roommates
+	  salt(Y).                  % and who has salt
 
-stealSaltFromNeighbor(X) :-
-    not -Salt(X),         % no evidence of X having Salt AND
-    not CloseFriends(X,Y), % it can be assumed that X and Y are not Close Friends
-    LiveTogether(X,Y),     % and X and Y are roommates
-	  Salt(Y).               % Y has Salt
+steal_salt_from_roommate(X) :-
+    not -salt(X),         % assume it is true there is no salt and
+    not closefriends(X,Y),  % it can be assumed that x and y are not close friends
+    livetogether(X,Y),      % and x and y are roommates
+	  salt(Y).                % y has salt 
+
+steal_salt_from_neighbor(X) :-
+    not -salt(X),         % no evidence of x having salt and
+    not closefriends(X,Y),  % it can be assumed that x and y are not close friends
+    livetogether(X,Y),      % and x and y are roommates
+	  salt(Y).                % y has salt
