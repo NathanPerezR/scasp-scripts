@@ -1,100 +1,184 @@
-% TODO:still need to account for APs
-% TODO:still need to account for extra hours
-% TODO:still need to account for eh
-% TODO:should prob remove the _
-% TODO:can likely adjust the core to make it easier to aduit, hours dont matter, the things at the bottom do
+% s(casp) programming
+:- use_module(library(scasp)).
+% uncomment to suppress warnings
+%:- style_check(-discontiguous).
+%:- style_check(-singleton).
+%:- set_prolog_flag(scasp_unknown, fail).
 
-% TODO: y is a prereq of x
+% todo: still need to account for aps
+% todo: still need to account for extra hours
+% todo: can likely adjust the core to make it easier to aduit, hours dont matter, the things at the bottom do
+% todo: y is a prereq of x
+% todo: y is a pre or corequiste of x
 
-% TODO: y is a pre OR corequiste of x
-
-% Freshmen_Year-----
-ecs_1100_(X).
-cs_1200_(X).
-math_2413_2417(X) :- math_2413(X).
-math_2413_2417(X) :- math_2417(X).
-cs_1337_(X).
-coreHours6(X).
-univ_1010_(X).
-
-cs_2336_2337(X).
-cs_2305_(X).
-math_2414_2419(X).
-phys_2325_(X).
-phys_2125_(X).
-
-%-----Sophmore_Year------
-cs_3305(X).
-cs_2340(X).
-phys_2326(X).
-phys_2126(X).
-core_6(X).
-
-cs_3341_(X).
-cs_3345_(X).
-cs_3377_(X).
-math_2418(X).
-core_6_(X).
-
-%-----Junior_Year--------
-cs_3162_(X).
-cs_4348_(X).
-cs_4349_(X).
-core3(X).
-free1(X).
-
-cs_3354(X).
-cs_4337(X).
-cs_4341(X).
-cs_4141(X).
-ecs_3390(X).
-core3(X).
-
-%-----Senior_Year-------
-cs_4384(X).
-cs_43XX(X).
-cs_43XX(X).
-
-cs_4347(X).
-free6(X).
-
-cs_4485(X).
-cs_43XX(X).
-free6(X).
+% domains
+cs(1200).
+cs(1337).
+cs(2305).
+cs(2340).
+cs(3162).
+cs(3305).
+cs(3341).
+cs(3345).
+cs(3354).
+cs(3377).
+cs(4141).
+cs(4337).
+cs(4341).
+cs(4347).
+cs(4348).
+cs(4349).
+cs(4384).
+cs(4485).
+cs(43xx).
+cs(43yy).
 
 
-%-----CORE---------------------------------------------------
-3_Hour_arts(X) :- Ahst_1301(X).
-3_Hour_arts(X) :- Ahst_1304(X.)
-3_Hour_arts(X) :- Ahst_2331(X).
-3_Hour_arts(X) :- Artsi301(X).
-3_Hour_arts(X) :- Film_2332(X).
-3_Hour_arts(X) :- Musi_1306(X).
-3_Hour_arts(X) :- Thea_1310(X).
+math(2413).
+math(2414).
+math(2417).
+math(2418).
+math(2419).
 
-3_hours_humanities(X) :- Ams_2300_(X).
-3_hours_humanities(X) :- Ams_2341_(X).
-3_hours_humanities(X) :- Huma_1301(X).
-3_hours_humanities(X) :- Lit_2331_(X).
-3_hours_humanities(X) :- Phil_1301(X).
-3_hours_humanities(X) :- Phil_2316(X).
-3_hours_humanities(X) :- Phil_2317(X).
+phys(2125).
+phys(2126).
+phys(2325).
+phys(2326).
 
-6_hours_history(X) :- Hist_1301(X).
-6_hours_history(X) :- Hist_1302(X).
-6_hours_history(X) :- Hist_2301(X).
-6_hours_history(X) :- Hist_2330(X).
-6_hours_history(X) :- Hist_2332(X).
+ams(2300).
+ams(2341).
 
-3_hours_social_science(X) :- Crim_1301(X).
-3_hours_social_science(X) :- Econ_2301(X).
-3_hours_social_science(X) :- Econ_2302(X).
-3_hours_social_science(X) :- Geog_2303(X).
-3_hours_social_science(X) :- Psy_2301_(X).
+huma(1301).
 
-rhet(X) :- rhet_1302(X)
+lit(2331).
 
-government(X) :- Govt_2305(X)
-government(X) :- Govt_2306(X)
-%-----CORE---------------------------------------------------
+phil(1301).
+phil(2316).
+phil(2317).
 
+psy(2301).
+
+govt(2305).
+govt(2306).
+
+rhet(1302).
+
+econ(2301).
+econ(2302).
+
+geog(2303).
+
+crim(1301).
+
+film(2332).
+
+ahst(1301).
+ahst(1304).
+ahst(2331).
+
+art(1301).
+
+musi(1306).
+
+thea(1310).
+
+freshmen_year(X) :-
+
+  %TODO need to find a way of doing the following:
+    X has taken all classes in the domain of Y, is there a better way then this
+
+% freshmen_year-----
+
+                      ecs_1100( ).
+                       cs_1200( ).
+     m2413_2417() :- math_2413( ). % must have one or the other
+     m2413_2417() :- math_2417( ). % must have one or the other
+                       cs_1337( ).
+                    corehours6( ).
+                     univ_1010( ).
+
+                  cs_2336_2337( ).
+                       cs_2305( ).
+                math_2414_2419( ).
+                     phys_2325( ).
+                     phys_2125( ).
+%-----sophmore_year------
+                       cs_3305( ).
+                       cs_2340( ).
+                     phys_2326( ).
+                     phys_2126( ).
+                        core_6( ).
+
+                       cs_3341( ).
+                       cs_3345( ).
+                       cs_3377( ).
+                     math_2418( ).
+                        core_6( ).
+%-----junior_year--------
+                       cs_3162( ).
+                       cs_4348( ).
+                       cs_4349( ).
+                         core3( ).
+                         free1( ).
+                         
+                       cs_3354( ).
+                       cs_4337( ).
+                       cs_4341( ).
+                       cs_4141( ).
+                      ecs_3390( ).
+                         core3( ).
+%-----senior_year-------
+                       cs_4384( ).
+                       cs_43xx( ).
+                       cs_43xx( ).
+
+                       cs_4347( ).
+                         free6( ).
+
+                       cs_4485( ).
+                       cs_43xx( ).
+                         free6( ).
+
+
+%-----core---------------------------------------------------
+three_hour_arts(X) :- 
+    ahst_1301(X)
+  ; ahst_1304(X)
+  ; ahst_2331(X)
+  ;  art_1301(X)
+  ; film_2332(X)
+  ; musi_1306(X)
+  ; thea_1310(X).
+
+three_hours_humanities(X) :-  
+     ams_2300(X)
+  ;  ams_2341(X)
+  ; huma_1301(X)
+  ;  lit_2331(X)
+  ; phil_1301(X)
+  ; phil_2316(X)
+  ; phil_2317(X).
+
+% TODO
+six_hours_history(X) :- .
+
+three_hours_social_science(X) :- 
+    crim_1301(X)
+  ; econ_2301(X)
+  ; econ_2302(X)
+  ; geog_2303(X)
+  ;  psy_2301(X).
+
+rhet_1302( ).
+
+government(X) :- 
+    govt_2305(X) 
+  ; govt_2306(X).
+%-----core---------------------------------------------------
+
+
+
+
+/** <ex> your ex queries go here, e.g.
+?- ? p( ).
+*/
